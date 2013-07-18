@@ -29,17 +29,13 @@ public class Set extends Album {
     @Override
     public String getPath(String photoName) {
         for (Image image : images) {
-            if(areEquals(photoName, image))
+            if(areEquals(photoName, image.getName()))
                 return addPath(photoName);
         }
         return null;
     }
 
-    private boolean areEquals(String photoName, Image image) {
-        return (image.getName() != null && image.getName().equals(photoName)) || (image.getName() == null && photoName == null);
-    }
-
-    public String getPath() {
-        return null;
+    private boolean areEquals(String photoName, String imageName) {
+        return (imageName != null && imageName.equals(photoName)) || (imageName == null && photoName == null);
     }
 }
