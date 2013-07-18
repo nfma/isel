@@ -15,7 +15,7 @@ public abstract class Album {
 //        this.name = name;
 //    }
 //    this must be a typo cause it's not possible to use constructors of other classes here.
-//    I used the constructor below to represent what I think should be correct
+//    I used the constructor below to represent what should be correct
 
     public Album(String name) {
         this.name = name;

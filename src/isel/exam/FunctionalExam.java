@@ -22,7 +22,7 @@ public class FunctionalExam {
     }
 
     public void filter(Iterator<Student> it, Func<Student, Integer> f) {
-        for (;it.hasNext();) {
+        while(it.hasNext()) {
             final Student student = it.next();
             if(f.exec(student))
                 it.remove();
@@ -33,14 +33,14 @@ public class FunctionalExam {
         int all = c.size();
         int sum = 0;
         final Iterator<Student> it = c.iterator();
-        for (; it.hasNext();) {
+        while (it.hasNext()) {
             final Student student = it.next();
             if(student.getGrade() >= 10) {
                 sum += student.getGrade();
                 it.remove();
             }
         }
-        if (all - c.size() == 0)
+        if (all - c.size() == 0) // prevent division by zero
             return 0;
         return sum / (float) (all - c.size());
     }

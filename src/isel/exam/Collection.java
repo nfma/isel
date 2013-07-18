@@ -13,7 +13,7 @@ import java.util.List;
 public class Collection extends Album {
     private List<Album> albums; //Called it albums here instead and used a list instead of the arrays being used everywhere else, which means...
     private int count; // this is pretty much useless but there you go
-    private int containerIdx; //this is even more useless... this guys are totally c++ devs...
+    private int containerIdx; //this is even more useless... these guys are totally c++ devs...
 
     public Collection(String name, int count) {
         super(name);
@@ -21,7 +21,6 @@ public class Collection extends Album {
         albums = new ArrayList<Album>(count);
     }
 
-    // Not sure what this constructor is all about but hey! i've seen worst
     public Collection(int count) {
         this("Collection " + count, count); // sorry no portuguese in code...
     }

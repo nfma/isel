@@ -264,9 +264,8 @@ public class TestExam {
             if (isTest(method)) {
                 numTests++;
                 try {
-                    if(shouldRedirectConsole(method)) {
+                    if(shouldRedirectConsole(method))
                         redirectConsole();
-                    }
                     method.invoke(new TestExam()); //run each test in a new instance to clean up everything
                     passed++;
                 } catch (Exception e) {
@@ -279,33 +278,6 @@ public class TestExam {
         }
         long duration = System.nanoTime() - startTime;
         System.out.println("Result: " + numTests + " test(s). " + passed + " test(s) passed and " + failed + " test(s) failed, in " + (duration / 1000000) + "ms");
-    }
-
-    private static void resetConsole(PrintStream console) {
-        System.setOut(console);
-    }
-
-    private static void redirectConsole() {
-        baos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(baos));
-    }
-
-    private String readResultFromConsoleOutput() {
-        final byte[] output = baos.toByteArray();
-        final BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream(output));
-        final byte[] buffer = new byte[output.length];
-        try {
-            bis.read(buffer);
-        } catch (IOException e) {
-            throw new RuntimeException(e); // this shouldn't really happen but in case it does it will just fail tests...
-        }
-        return new String(buffer).trim(); //the byte array might have extra empty spaces caused by the growth of the output stream
-    }
-
-    private static void printFailedTest(PrintStream console, Method method, Exception e) {
-        console.println(method.getName() + " failed");
-        e.printStackTrace(console);
-        console.println("\n");
     }
 
     private static boolean isTest(Method method) {
@@ -324,6 +296,33 @@ public class TestExam {
             }
         }
         return false;
+    }
+
+    private static void redirectConsole() {
+        baos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(baos));
+    }
+
+    private static void resetConsole(PrintStream console) {
+        System.setOut(console);
+    }
+
+    private String readResultFromConsoleOutput() {
+        final byte[] output = baos.toByteArray();
+        final BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream(output));
+        final byte[] buffer = new byte[output.length];
+        try {
+            bis.read(buffer);
+        } catch (IOException e) {
+            throw new RuntimeException(e); // this shouldn't really happen but in case it does it will just fail tests...
+        }
+        return new String(buffer).trim(); //the byte array might have extra empty spaces caused by the growth of the output stream
+    }
+
+    private static void printFailedTest(PrintStream console, Method method, Exception e) {
+        console.println(method.getName() + " failed");
+        e.printStackTrace(console);
+        console.println("\n");
     }
 
     @Retention(RUNTIME)
